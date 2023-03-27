@@ -1,0 +1,18 @@
+{% extends "blog/_base.html" %}
+
+{% block title %}
+    {{article.title}}
+{% endblock title %}
+
+{% block  content %}
+    <p>
+        <b>
+            {{article.title}}
+        </b>
+    </p>
+    <div>
+        <article>
+            {{article.content}}
+        </article>
+    </div>
+{% endblock content %}
