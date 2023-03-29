@@ -52,5 +52,5 @@ class RevokeTokenView(APIView):
     permission_classes = (IsAuthenticated,)
 
     def delete(self, request):
-        self.request.auth.delete()
+        self.request.auth.delete() # type: ignore
         return Response({"msg": "Token deleted"}, status=201)

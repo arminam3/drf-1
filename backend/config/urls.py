@@ -14,9 +14,11 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, re_path
+from django.views.generic import TemplateView
 
 from rest_framework.authtoken.views import obtain_auth_token
+from dj_rest_auth.views import PasswordResetConfirmView
 
 
 urlpatterns = [
@@ -24,5 +26,13 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls')),  #just for sesion authentications
     path('', include('blog.urls')),
     path('api/', include('api.urls')),
-    path('api/token-auth/', obtain_auth_token),
+    path('api/rest-auth/password/reset/confirm/<uidb64>/<token>/', 
+         PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
+    path('api/rest-auth/', include('dj_rest_auth.urls')),
+    path('api/rest-auth/registration/', include('dj_rest_auth.registration.urls')),
+    # path('api/token-auth/', obtain_auth_token),
+
+    # JWT
+    
+
 ]

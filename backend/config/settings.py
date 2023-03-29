@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
 
     # Custom_apps
     'blog.apps.BlogConfig',
@@ -45,6 +46,12 @@ INSTALLED_APPS = [
     # third-party
     'rest_framework',
     'rest_framework.authtoken',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    "dj_rest_auth",
+    'dj_rest_auth.registration',
+
 ]
 
 MIDDLEWARE = [
@@ -141,3 +148,7 @@ REST_FRAMEWORK = {
     ]
 }
 
+
+SITE_ID = 1
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
