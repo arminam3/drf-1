@@ -31,7 +31,7 @@ urlpatterns = [
          PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
     path('api/rest-auth/', include('dj_rest_auth.urls')),
     path('api/rest-auth/registration/', include('dj_rest_auth.registration.urls')),
-    path('api/token-auth/', obtain_auth_token),
+    # path('api/token-auth/', obtain_auth_token),
 
     # JWT
     # path('api/token/', jwt_views.TokenObtainPairView.as_view(), name='token_obtain_pair'),
