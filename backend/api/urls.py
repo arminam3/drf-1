@@ -1,19 +1,17 @@
-from django.urls import path
+from django.urls import path, include
+
+from rest_framework import routers
 
 from api.views import (
-                        ArticleListApi, 
-                        ArticleDetailApi, 
-                        UserListApi,
-                        UserDetailApi,
-                        RevokeTokenView
-                        )
-
+                        ArticleViewSet,
+                        UserViewSet
+                    )
 app_name = "api"
 
+router = routers.SimpleRouter()
+router.register('users', UserViewSet)
+router.register('', ArticleViewSet)
+
 urlpatterns = [
-    path("", ArticleListApi.as_view(), name="article_list"),
-    path("<int:pk>/", ArticleDetailApi.as_view(), name="article_detail"),
-    path("users/", UserListApi.as_view(), name="user_list"),
-    path("users/<int:pk>/", UserDetailApi.as_view(), name="user_detail"),
-    path("revoke/", RevokeTokenView.as_view(), name="revoke_token"),
+    path('', include(router.urls))
     ]

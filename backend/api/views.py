@@ -1,5 +1,5 @@
 from django.urls import reverse_lazy
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 
 from rest_framework.generics import (
                                     ListCreateAPIView, 
@@ -23,20 +23,6 @@ from .permissions import (
                         IsSuperuserOrStaffReadOnly
                         )
 
-
-# class ArticleListApi(ListCreateAPIView):
-#     queryset = Article.objects.all()
-#     serializer_class = ArticleSerializer
-    # permission_classes = [IsAuthenticated]
-    # authentication_classes = (BasicAuthentication,)
-
-# class ArticleDetailApi(RetrieveUpdateDestroyAPIView):
-#     queryset = Article
-#     serializer_class = ArticleSerializer
-    # lookup_field = "slug"
-    # permission_classes = [IsAuthorOrReadOnly]
-
-
 class ArticleViewSet(ModelViewSet):
     queryset = Article.objects.all()
     serializer_class = ArticleSerializer
@@ -48,20 +34,9 @@ class ArticleViewSet(ModelViewSet):
             permission_classes = [IsSuperUserOrStaffReadOnly]
         return [permission() for permission in permission_classes]
 
-# class UserListApi(ListCreateAPIView):
-#     def get_queryset(self):
-#         self.request.auth                       # type: ignore
-#         return User.objects.all()
-#     serializer_class = UserSerializer
-#     permission_classes = (IsSuperuserOrStaffReadOnly,)
-
-# class UserDetailApi(RetrieveUpdateAPIView):
-#     queryset = User
-#     serializer_class = UserSerializer
-#     permission_classes = (IsSuperuserOrStaffReadOnly,)        
 
 class UserViewSet(ModelViewSet):
-    queryset = User.objects.all()
+    queryset = get_user_model().objects.all()
     serializer_class = UserSerializer
     permission_classes = (IsSuperUserOrStaffReadOnly,)
 
